@@ -1,0 +1,36 @@
+{
+    "name": "assertwell/wp-core-test-framework",
+    "description": "Streamline testing WordPress plugins and themes using the WordPress core test framework",
+    "type": "library",
+    "keywords": [
+        "wordpress",
+        "testing"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Steve Grunwell",
+            "homepage": "https://stevegrunwell.com"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/assertwell/wp-core-test-framework/issues",
+        "source": "https://github.com/assertwell/wp-core-test-framework"
+    },
+    "scripts": {
+        "refresh-wp-install-tests": [
+            "sh bin/refresh-wp-install-tests.sh"
+        ]
+    },
+    "scripts-descriptions": {
+        "refresh-wp-install-tests": "Refresh the bin/wp-install-tests.sh file from WP-CLI's source."
+    },
+    "bin": [
+        "bin/install-wp-tests.sh"
+    ],
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
+    }
+}
