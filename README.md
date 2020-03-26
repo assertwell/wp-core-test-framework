@@ -31,7 +31,7 @@ To use it, find anywhere you're currently (or would be) referencing `bin/install
   install:
       - composer install --prefer-dist --no-interaction
 -     - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
-+     - bash vendor/bin/install-wp-tests.sh wordpress_test root '' localhost + $WP_VERSION
++     - bash vendor/bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
 ```
 
 If your project already contains a `bin/install-wp-tests.sh` file, you may delete it from your repository.
