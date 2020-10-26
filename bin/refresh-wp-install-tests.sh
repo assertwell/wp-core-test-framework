@@ -8,4 +8,4 @@ DIR="$( cd "$(dirname "$0")" || exit 1; pwd -P )"
 curl -s "$SRC" \
     | sed $'2i\\\n# Notice: This file is pulled from the WP-CLI scaffold command,\\\n# and should not be modified directly.\n' \
     > "$DIR/install-wp-tests.sh" \
-    && echo "\033[0;32mbin/install-wp-tests.sh has been updated to match ${SRC}\033[0;0m"
+    && echo -e "\033[0;32mbin/install-wp-tests.sh has been updated to match ${SRC}\033[0;0m"
