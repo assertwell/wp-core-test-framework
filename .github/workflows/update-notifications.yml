@@ -1,0 +1,46 @@
+# Watch the upstream version for changes and issue PRs when new versions are available.
+name: Watch for updates
+
+on:
+  push:
+    branches:
+      - feature/automate-updates
+  schedule:
+    - cron: '0 12 * * *'
+
+jobs:
+  refresh-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Patch the current upstream version
+        shell: bash
+        run: bin/refresh-wp-install-tests.sh
+
+      - name: Check for differences
+        id: differences
+        run: echo "::set-output name=changes::"$(git diff --ignore-space-change --quiet bin/install-wp-tests.sh; echo $?)""
+
+      - name: Retrieve details from the WP-CLI repo
+        if: ${{ steps.differences.outputs.changes == '1' }}
+        id: upstream
+        uses: actions/github-script@v5
+        with:
+          script: |
+            const commit = await github.rest.repos.listCommits({
+              owner: 'wp-cli',
+              repo: 'scaffold-command',
+              path: 'templates/install-wp-tests.sh',
+              per_page: 1
+            });
+            console.log(`::set-output name=ref::${commit.data[0].sha.substring(0, 8)}`);
+            console.log(`::set-output name=url::${commit.data[0].html_url}`);
+
+      - name: Submit PR
+        uses: technote-space/create-pr-action@v2
+        with:
+          COMMIT_MESSAGE: "Reference: ${{ steps.upstream.outputs.url }}"
+          PR_BRANCH_NAME: "update/${{ steps.upstream.outputs.ref }}"
+          PR_TITLE: "Update install-wp-tests.sh to match ${{ steps.upstream.outputs.ref }}"
