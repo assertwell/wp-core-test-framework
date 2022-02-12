@@ -11,4 +11,4 @@ curl -s "$upstream_src" | sed "2i\\
 # ${upstream_src}
 " > "${bin_dir}/install-wp-tests.sh" || exit 1
 
-printf "\033[0;32m%s %s\033[0;32m\n" 'bin/install-wp-tests.sh has been updated to match' "$upstream_src"
+printf '\033[0;32m%s %s\033[0;32m\n' 'bin/install-wp-tests.sh has been updated to match' "$upstream_src"

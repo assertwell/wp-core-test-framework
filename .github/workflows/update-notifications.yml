@@ -2,9 +2,6 @@
 name: Watch for updates
 
 on:
-  push:
-    branches:
-      - feature/automate-updates
   schedule:
     - cron: '0 12 * * *'
 
